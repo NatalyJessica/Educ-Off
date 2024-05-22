@@ -2,15 +2,16 @@ import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { Calendar } from 'react-native-calendars';
 
 
 export default function MainScreen() {
   return (
    <KeyboardAwareScrollView>
        <View style={styles.container}>
-        <View>
-          <Text>Caledario</Text>
+        <View style={styles.modalView}>
+          <Text>Pagina inicial</Text>
+          <Calendar/>
         </View>
         <View>
           <Text>Andamento</Text>
@@ -66,5 +67,21 @@ const styles = StyleSheet.create({
    
     
   },
- 
+
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius:20,
+    width: '90%',
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#0000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4
+  },
 });
