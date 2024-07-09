@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function MainScreen() {
+export default function ProfileScreen() {
 
   //navegação
   const navigation = useNavigation();
@@ -15,27 +15,22 @@ export default function MainScreen() {
    <KeyboardAwareScrollView>
        <View style={styles.container}>
         <View>
-          <Text>Caledario</Text>
+            <Text>Perfil</Text>
         </View>
-        <View>
-          <Text>Andamento</Text>
-        </View>
-        <View>
-          <Text>a fazer</Text>
-        </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
-          <Icon name="home" size={35} color="black" /> 
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Contents')}>
-          <Icon name="book" size={35} color="black" /> 
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Download')}>
-          <Icon name="download" size={35} color="black" /> 
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Profile')} >
-          <Icon name="user" size={35} color="black" /> 
-        </TouchableOpacity>
+        
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
+                <Icon name="home" size={35} color="black" /> 
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Contents')}>
+                <Icon name="book" size={35} color="black" /> 
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Download')}>
+                <Icon name="download" size={35} color="black" /> 
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Profile')} >
+                <Icon name="user" size={35} color="black" /> 
+            </TouchableOpacity>
       </View>
     </View>
    </KeyboardAwareScrollView>

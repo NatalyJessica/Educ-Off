@@ -5,6 +5,9 @@ import LoginScreen from '../Screens/LoginScreen/index'
 import PasswordRecovery from '../Screens/PasswordRecovery/index'
 import RegisterScreen from '../Screens/RegisterScreen/index'
 import MainScreen from '../Screens/MainScreen/index'
+import ContentsScreen from '../Screens/ContentsScreen'
+import DownloadScreen from '../Screens/DownloadScreens'
+import ProfileScreen from '../Screens/ProfileScreen'
 
 
 
@@ -40,6 +43,24 @@ export default function Routes(){
             <Stack.Screen
                 name="Register"
                 component={RegisterScreen}
+                options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+                name="Contents"
+                component={ContentsScreen}
+                options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+                name="Download"
+                component={DownloadScreen}
+                options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
                 options={{headerShown: false}}
             />
 

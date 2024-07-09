@@ -80,7 +80,7 @@ export default function LoginScreen() {
             <Text style={styles.textEsq}>Esqueceu a senha?</Text>
             </TouchableOpacity>
             <View>
-              <TouchableOpacity style={styles.btns} onPress={handleLogin}>
+              <TouchableOpacity style={styles.btns} onPress={() => navigation.navigate('Main')}>
               <Text style={styles.btnTxt}>Logar</Text>
               </TouchableOpacity>
             </View>
