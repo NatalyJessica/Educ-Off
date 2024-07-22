@@ -12,7 +12,7 @@ export default function ContentsScreen() {
   const navigation = useNavigation();
 
   return (
-   <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
         <View>
            <Text> Materias</Text>
@@ -39,6 +39,9 @@ export default function ContentsScreen() {
 
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-end', // Alinha os itens ao rodapé

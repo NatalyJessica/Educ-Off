@@ -12,7 +12,7 @@ export default function MainScreen() {
   const navigation = useNavigation();
 
   return (
-   <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
         <View>
           <Text>Caledario</Text>
@@ -45,6 +45,10 @@ export default function MainScreen() {
 
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
+
   container: {
     flex: 1,
     justifyContent: 'flex-end', // Alinha os itens ao rodapé

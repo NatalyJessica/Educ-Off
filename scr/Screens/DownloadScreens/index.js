@@ -12,7 +12,7 @@ export default function DownloadScreen() {
   const navigation = useNavigation();
 
   return (
-   <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
         <View>
             <Text>Download</Text>
@@ -40,6 +40,10 @@ export default function DownloadScreen() {
 
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
+
   container: {
     flex: 1,
     justifyContent: 'flex-end', // Alinha os itens ao rodapé
