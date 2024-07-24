@@ -17,13 +17,22 @@ export default function MainScreen() {
           <View style={styles.header}>
             <Text style={styles.headerText}>Página Inicial</Text>
           </View>
+
           <Calendario></Calendario>
-        <View>
-          <Text>Andamento</Text>
+
+        <View style={styles.percentageContainer}>
+          <Text style={styles.percentageText}>Andamento</Text>
+          {/* Adicione uma barra de progresso aqui */}
         </View>
-        <View>
-          <Text>a fazer</Text>
+
+        <View style={styles.todoContainer}>
+        <Text style={styles.todoTitle}>A FAZER</Text>
+        <View style={styles.todoItem}>
+          <Text style={styles.todoText}>Fazer simulado Fuvest</Text>
+          <Text style={styles.todoDate}>21 JUNHO 2023</Text>
         </View>
+      </View>
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
           <Icon name="home" size={35} color="black" /> 
@@ -87,4 +96,48 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
 },
+  percentageContainer: {
+    alignItems: 'center',
+    marginVertical: 20,
+    backgroundColor: 'white'
+  },
+  percentageText: {
+    fontSize: 18,
+    backgroundColor: 'white'
+  },
+  todoContainer: {
+    marginHorizontal: 20,
+    marginVertical: 20,
+    
+  },
+  todoTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  todoItem: {
+    padding: 15,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+    backgroundColor: 'white'
+  },
+  todoText: {
+    fontSize: 16,
+  },
+  todoDate: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  navBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+    backgroundColor: '#ddd',
+  },
+  navButton: {
+    alignItems: 'center',
+  },
+  navButtonText: {
+    fontSize: 16,
+  },
 });
