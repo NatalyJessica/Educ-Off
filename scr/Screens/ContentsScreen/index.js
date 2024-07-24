@@ -30,6 +30,9 @@ export default function ContentsScreen() {
             <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Profile')} >
                 <Icon name="user" size={35} color="black" /> 
             </TouchableOpacity>
+            <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Doubts')} >
+          <Icon name="comments" size={35} color="black" /> 
+        </TouchableOpacity>
       </View>
     </View>
    </KeyboardAwareScrollView>

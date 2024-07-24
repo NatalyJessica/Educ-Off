@@ -8,6 +8,7 @@ import MainScreen from '../Screens/MainScreen/index'
 import ContentsScreen from '../Screens/ContentsScreen'
 import DownloadScreen from '../Screens/DownloadScreens'
 import ProfileScreen from '../Screens/ProfileScreen'
+import DoubtsScreen from '../Screens/DoubtsScreen'
 
 
 
@@ -61,6 +62,12 @@ export default function Routes(){
             <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
+                options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+                name="Doubts"
+                component={DoubtsScreen}
                 options={{headerShown: false}}
             />
 
