@@ -9,8 +9,7 @@ import ContentsScreen from '../Screens/ContentsScreen'
 import DownloadScreen from '../Screens/DownloadScreens'
 import ProfileScreen from '../Screens/ProfileScreen'
 import DoubtsScreen from '../Screens/DoubtsScreen'
-
-
+import Event from '../Screens/MainScreen/Event'
 
 
 const Stack = createNativeStackNavigator();
@@ -71,8 +70,11 @@ export default function Routes(){
                 options={{headerShown: false}}
             />
 
-            
-            
+        <Stack.Screen 
+            name="Event" 
+            component={Event} 
+            options={{ title: 'Evento' }} 
+            />   
 
         </Stack.Navigator>
     )

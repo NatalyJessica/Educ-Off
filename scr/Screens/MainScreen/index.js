@@ -3,7 +3,7 @@ import {View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-
+import Calendario from './Calendario'
 
 
 export default function MainScreen() {
@@ -14,9 +14,10 @@ export default function MainScreen() {
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
-        <View>
-          <Text>Caledario</Text>
-        </View>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Página Inicial</Text>
+          </View>
+          <Calendario></Calendario>
         <View>
           <Text>Andamento</Text>
         </View>
@@ -78,5 +79,12 @@ const styles = StyleSheet.create({
    
     
   },
- 
+  header: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+},
 });
