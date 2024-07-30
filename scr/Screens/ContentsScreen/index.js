@@ -14,9 +14,28 @@ export default function ContentsScreen() {
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
-        <View>
-           <Text> Materias</Text>
+        <View style={styles.header}>
+           <Text style={styles.headerText}> Materias</Text>
         </View>
+
+        <View style={styles.container}>
+          <Text>Português</Text>
+        </View>
+
+        <View style={styles.container}>
+          <Text>Matemártica</Text>
+        </View>
+
+        <View style={styles.container}>
+          <Text>Biologia</Text>
+        </View>
+
+        <View style={styles.container}>
+          <Text>Simulados</Text>
+        </View>
+
+        
+
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
                 <Icon name="home" size={35} color="black" /> 
@@ -71,5 +90,13 @@ const styles = StyleSheet.create({
    
     
   },
+  header: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+}
  
 });
