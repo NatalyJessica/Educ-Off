@@ -3,8 +3,15 @@ import {View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { Image, ScrollView, ProgressBarAndroidBase } from 'react-native';
 
 
+const subPages = [
+  {name: 'Matematica', image: require('../../Assets/Matematica.png.jpg', )},
+  {name: 'Portugues', image: require('../../Assets/Portugues.png.jpg', )},
+  {name: 'Biologia', image: require('../../Assets/Biologia.png.jpg', )},
+  {name: 'Simulado', image: require('../../Assets/Simulado.png.jpg', )},
+]
 
 export default function ContentsScreen() {
 
@@ -17,25 +24,17 @@ export default function ContentsScreen() {
         <View style={styles.header}>
            <Text style={styles.headerText}> Materias</Text>
         </View>
-
-        <View style={styles.container}>
-          <Text>Português</Text>
-        </View>
-
-        <View style={styles.container}>
-          <Text>Matemártica</Text>
-        </View>
-
-        <View style={styles.container}>
-          <Text>Biologia</Text>
-        </View>
-
-        <View style={styles.container}>
-          <Text>Simulados</Text>
-        </View>
-
-        
-
+          {subPages.map((subPages, index)=>(
+            <TouchableOpacity
+              key={index}
+              style={styles.subjectContainer}
+              onPress={()=> navigation.navigate('Subpages', {subPages})}
+              >
+                <Image source={subPages.image} style={styles.subjectImage}/>
+                <Text style={styles.subjectName}></Text>
+              </TouchableOpacity>
+          ))}
+  
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
                 <Icon name="home" size={35} color="black" /> 
@@ -97,6 +96,28 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-}
+}, 
+  subjectContainer: {
+    backgroundColor: '#fff',
+    padding: 30,
+    marginVertical: 10,
+    marginHorizontal: 30,
+    borderRadius: 10,
+    elevation: 2,
+    justifyContent: 'flex-end',
+    flex: 1
+  },
+  subjectImage: {
+    width: 100,
+    height: 100,
+    marginBottom: 10,
+  },
+  subjectName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  progressBar: {
+    marginTop: 10,
+  },
  
 });

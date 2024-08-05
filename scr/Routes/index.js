@@ -10,7 +10,7 @@ import DownloadScreen from '../Screens/DownloadScreens'
 import ProfileScreen from '../Screens/ProfileScreen'
 import DoubtsScreen from '../Screens/DoubtsScreen'
 import Event from '../Screens/MainScreen/Event'
-
+import SubPages from '../Screens/ContentsScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -70,10 +70,16 @@ export default function Routes(){
                 options={{headerShown: false}}
             />
 
-        <Stack.Screen 
-            name="Event" 
-            component={Event} 
-            options={{ title: 'Evento' }} 
+            <Stack.Screen 
+                name="Event" 
+                component={Event} 
+                options={{ title: 'Evento' }} 
+            />  
+
+            <Stack.Screen 
+                name="SubPages" 
+                component={SubPages} 
+                options={{ title: 'SubPages' }} 
             />   
 
         </Stack.Navigator>
