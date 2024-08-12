@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import Calendario from './Calendario'
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function MainScreen() {
 
@@ -12,7 +12,8 @@ export default function MainScreen() {
   const navigation = useNavigation();
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
+    <SafeAreaView>
+        <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Página Inicial</Text>
@@ -52,6 +53,8 @@ export default function MainScreen() {
       </View>
     </View>
    </KeyboardAwareScrollView>
+    </SafeAreaView>
+    
   );
 }
 

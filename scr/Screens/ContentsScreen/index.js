@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { Image, Button } from 'react-native';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const subPages = [
   {name: 'Matematica', image: require('../../Assets/Matematica.png.jpg'), screen: 'MatematicaScreen'},
@@ -19,6 +19,7 @@ export default function ContentsScreen() {
   const navigation = useNavigation();
 
   return (
+    
     <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
         <View style={styles.header}>
