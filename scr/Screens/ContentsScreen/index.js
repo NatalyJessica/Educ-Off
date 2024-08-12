@@ -3,14 +3,14 @@ import {View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-import { Image, ScrollView, ProgressBarAndroidBase } from 'react-native';
+import { Image, Button } from 'react-native';
 
 
 const subPages = [
-  {name: 'Matematica', image: require('../../Assets/Matematica.png.jpg', )},
-  {name: 'Portugues', image: require('../../Assets/Portugues.png.jpg', )},
-  {name: 'Biologia', image: require('../../Assets/Biologia.png.jpg', )},
-  {name: 'Simulado', image: require('../../Assets/Simulado.png.jpg', )},
+  {name: 'Matematica', image: require('../../Assets/Matematica.png.jpg'), screen: 'MatematicaScreen'},
+  {name: 'Portugues', image: require('../../Assets/Portugues.png.jpg'), screen: 'PortuguesScreen'},
+  {name: 'Biologia', image: require('../../Assets/Biologia.png.jpg'), screen: 'BiologiaScreen'},
+  {name: 'Simulado', image: require('../../Assets/Simulado.png.jpg'), screen: 'SimuladoScreen'},
 ]
 
 export default function ContentsScreen() {
@@ -23,15 +23,17 @@ export default function ContentsScreen() {
        <View style={styles.container}>
         <View style={styles.header}>
            <Text style={styles.headerText}> Materias</Text>
+            {/* Adicione uma barra de progresso aqui */}
         </View>
+        
           {subPages.map((subPages, index)=>(
             <TouchableOpacity
               key={index}
               style={styles.subjectContainer}
-              onPress={()=> navigation.navigate('Subpages', {subPages})}
+              onPress={()=> navigation.navigate(subPages.screen)}
               >
                 <Image source={subPages.image} style={styles.subjectImage}/>
-                <Text style={styles.subjectName}></Text>
+                <Text style={styles.subjectName}>{subPages.name}</Text>
               </TouchableOpacity>
           ))}
   
@@ -105,7 +107,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 2,
     justifyContent: 'flex-end',
-    flex: 1
+    flex: 1, 
+    elevation: 3,
   },
   subjectImage: {
     width: 100,

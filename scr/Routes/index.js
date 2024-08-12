@@ -10,7 +10,11 @@ import DownloadScreen from '../Screens/DownloadScreens'
 import ProfileScreen from '../Screens/ProfileScreen'
 import DoubtsScreen from '../Screens/DoubtsScreen'
 import Event from '../Screens/MainScreen/Event'
-import SubPages from '../Screens/ContentsScreen'
+//import SubPages from '../Screens/ContentsScreen'
+import MatematicaScreen from '../Screens/ContentsScreen/Materias/MatematicaScreen'
+import PortuguesScreen from '../Screens/ContentsScreen/Materias/PortuguesScreen'
+import BiologiaScreen from '../Screens/ContentsScreen/Materias/BiologiaScreen'
+import SimuladoScreen from '../Screens/ContentsScreen/Materias/SimuladoScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -75,12 +79,27 @@ export default function Routes(){
                 component={Event} 
                 options={{ title: 'Evento' }} 
             />  
+             
+             <Stack.Screen 
+                name="PortuguesScreen" 
+                component={PortuguesScreen} 
+            />  
+            
+            <Stack.Screen 
+                name="MatematicaScreen" 
+                component={MatematicaScreen} 
+            />
 
             <Stack.Screen 
-                name="SubPages" 
-                component={SubPages} 
-                options={{ title: 'SubPages' }} 
-            />   
+                name="BiologiaScreen" 
+                component={BiologiaScreen} 
+            />
+
+            <Stack.Screen 
+                name="SimuladoScreen" 
+                component={SimuladoScreen} 
+            />
+            
 
         </Stack.Navigator>
     )
