@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
   containerLogo: {
     flex: 2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 50,
   },
 
   image: {

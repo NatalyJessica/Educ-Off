@@ -12,7 +12,7 @@ export default function MainScreen() {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView >
         <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
           <View style={styles.header}>
@@ -34,7 +34,10 @@ export default function MainScreen() {
         </View>
       </View>
 
-      <View style={styles.buttonContainer}>
+      
+    </View>
+   </KeyboardAwareScrollView>
+   <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
           <Icon name="home" size={35} color="black" /> 
         </TouchableOpacity>
@@ -51,8 +54,6 @@ export default function MainScreen() {
           <Icon name="comments" size={35} color="black" /> 
         </TouchableOpacity>
       </View>
-    </View>
-   </KeyboardAwareScrollView>
     </SafeAreaView>
     
   );
