@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import {useFonts, Lustria_400Regular} from '@expo-google-fonts/lustria'
 import { TextInput, IconButton } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -21,7 +22,8 @@ export default function RegisterScreen() {
 
 
   return (
-        <KeyboardAwareScrollView>
+        <SafeAreaView style={styles.safeArea}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
         <View style={styles.containerLogo}>
           <Image
@@ -70,10 +72,17 @@ export default function RegisterScreen() {
         </View>
         </View>
         </KeyboardAwareScrollView>
+        </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
 
   container: {
     flex: 1.5,

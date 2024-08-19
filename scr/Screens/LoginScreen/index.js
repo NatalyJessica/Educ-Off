@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useFonts, Lustria_400Regular } from '@expo-google-fonts/lustria';
 import { TextInput, IconButton } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function LoginScreen() {
@@ -36,7 +37,8 @@ export default function LoginScreen() {
   };
 
   return (
-      <KeyboardAwareScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
       <View style={styles.containerLogo}>
         <Image
@@ -94,14 +96,24 @@ export default function LoginScreen() {
       </View>
     </View>
     </KeyboardAwareScrollView>
+    </SafeAreaView>
   )
    
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
 
   container: {
     flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+
+  scrollContainer: {
+    flexGrow: 1,
   },
 
   containerLogo: {

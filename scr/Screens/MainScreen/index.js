@@ -12,7 +12,7 @@ export default function MainScreen() {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={styles.safeArea}>
         <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
        <View style={styles.container}>
           <View style={styles.header}>
@@ -58,6 +58,11 @@ export default function MainScreen() {
 
 
 const styles = StyleSheet.create({
+
+  safeArea: {
+    flex: 1,
+  },
+  
   scrollContainer: {
     flexGrow: 1,
   },

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { TextInput,  } from 'react-native-paper'
 import {useFonts, Lustria_400Regular} from '@expo-google-fonts/lustria'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -16,7 +17,8 @@ export default function PasswordRecovery() {
   };
 
   return (
-        <KeyboardAwareScrollView>
+    <SafeAreaView style={styles.safeArea}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
         <View style={styles.containerLogo}>
           <Image
@@ -40,10 +42,17 @@ export default function PasswordRecovery() {
         </View>
         </View>
         </KeyboardAwareScrollView>
+        </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
 
   container: {
     flex: 1,
