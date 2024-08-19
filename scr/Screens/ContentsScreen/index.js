@@ -19,9 +19,12 @@ export default function ContentsScreen() {
   const navigation = useNavigation();
 
   return (
-    
-    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
-       <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.scrollContainer}
+        style={styles.scrollView}>
+
+       <View style={styles.mainContent}>
         <View style={styles.header}>
            <Text style={styles.headerText}> Materias</Text>
             {/* Adicione uma barra de progresso aqui */}
@@ -36,7 +39,9 @@ export default function ContentsScreen() {
                 <Image source={subPages.image} style={styles.subjectImage}/>
                 <Text style={styles.subjectName}>{subPages.name}</Text>
               </TouchableOpacity>
-          ))}
+          ))}  
+          </View>
+        </KeyboardAwareScrollView>
   
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
@@ -51,46 +56,25 @@ export default function ContentsScreen() {
             <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Profile')} >
                 <Icon name="user" size={35} color="black" /> 
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Doubts')} >
-          <Icon name="comments" size={35} color="black" /> 
-        </TouchableOpacity>
       </View>
-    </View>
-   </KeyboardAwareScrollView>
+   </SafeAreaView>
   );
 }
 
 
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-  },
   container: {
     flex: 1,
-    justifyContent: 'flex-end', // Alinha os itens ao rodapé
-    backgroundColor: '#f0f0f0',
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between', // Distribui os botões igualmente
-    paddingHorizontal: 18, // Espaçamento horizontal
-    paddingVertical: 10, // Espaçamento vertical
-    backgroundColor: 'white', // Cor de fundo do container
-    shadowColor: '#000', // Cor da sombra
-    shadowOpacity: 0.5, // Opacidade da sombra
-    shadowRadius: 3, // Raio da sombra
-    shadowOffset: {
-      width: 0,
-      height: -2, // Ajuste para sombra ficar na parte inferior
-    },
-    elevation: 5, // Elevação da sombra no Android
+  scrollView: {
+    flex: 1,
   },
-
-  button: {
-    backgroundColor: 'white',
-   
-    
+  scrollContainer: {
+    paddingBottom: 60, // Espaço para o rodapé
+  },
+  mainContent: {
+    flex: 1,
   },
   header: {
     alignItems: 'center',
@@ -99,17 +83,15 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-}, 
+  },
   subjectContainer: {
     backgroundColor: '#fff',
     padding: 30,
     marginVertical: 10,
     marginHorizontal: 30,
     borderRadius: 10,
-    elevation: 2,
-    justifyContent: 'flex-end',
-    flex: 1, 
     elevation: 3,
+    justifyContent: 'flex-end',
   },
   subjectImage: {
     width: 100,
@@ -120,8 +102,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  progressBar: {
-    marginTop: 10,
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 18,
+    paddingVertical: 20,
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    elevation: 5,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
- 
+  button: {
+    backgroundColor: 'white',
+  },
 });

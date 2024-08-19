@@ -33,10 +33,8 @@ export default function MainScreen() {
           <Text style={styles.todoDate}>21 JUNHO 2023</Text>
         </View>
       </View>
-
-      
     </View>
-   </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
    <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
           <Icon name="home" size={35} color="black" /> 
@@ -50,10 +48,8 @@ export default function MainScreen() {
         <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Profile')} >
           <Icon name="user" size={35} color="black" /> 
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Doubts')} >
-          <Icon name="comments" size={35} color="black" /> 
-        </TouchableOpacity>
       </View>
+
     </SafeAreaView>
     
   );
@@ -71,11 +67,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end', // Alinha os itens ao rodapé
     backgroundColor: '#f0f0f0',
   },
-  buttonContainer: {
+
+  mainContent: {
+    flex: 1,
+    paddingBottom: 60, // Espaçamento para evitar sobreposição com o rodapé
+  },
+
+   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between', // Distribui os botões igualmente
     paddingHorizontal: 18, // Espaçamento horizontal
-    paddingVertical: 10, // Espaçamento vertical
+    paddingVertical: 20, // Espaçamento vertical
     backgroundColor: 'white', // Cor de fundo do container
     shadowColor: '#000', // Cor da sombra
     shadowOpacity: 0.5, // Opacidade da sombra
@@ -85,8 +87,10 @@ const styles = StyleSheet.create({
       height: -2, // Ajuste para sombra ficar na parte inferior
     },
     elevation: 5, // Elevação da sombra no Android
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
-
   button: {
     backgroundColor: 'white',
    

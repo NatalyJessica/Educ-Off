@@ -9,9 +9,9 @@ export default function ProfileScreen() {
   // navegação
   const navigation = useNavigation();
 
-  return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
+  return (<
+    View style={styles.container}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Perfil</Text>
         </View>
@@ -32,6 +32,8 @@ export default function ProfileScreen() {
             <Text style={styles.optionButtonText}>Sair</Text>
           </TouchableOpacity>
         </View>
+        </KeyboardAwareScrollView>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
             <Icon name="home" size={35} color="black" />
@@ -45,12 +47,9 @@ export default function ProfileScreen() {
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
             <Icon name="user" size={35} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Doubts')} >
-                <Icon name="comments" size={35} color="black" /> 
-            </TouchableOpacity>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    
   );
 }
 

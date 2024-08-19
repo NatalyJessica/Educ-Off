@@ -8,7 +8,6 @@ import MainScreen from '../Screens/MainScreen/index'
 import ContentsScreen from '../Screens/ContentsScreen'
 import DownloadScreen from '../Screens/DownloadScreens'
 import ProfileScreen from '../Screens/ProfileScreen'
-import DoubtsScreen from '../Screens/DoubtsScreen'
 import Event from '../Screens/MainScreen/Event'
 //import SubPages from '../Screens/ContentsScreen'
 import MatematicaScreen from '../Screens/ContentsScreen/Materias/MatematicaScreen'
@@ -68,11 +67,7 @@ export default function Routes(){
                 options={{headerShown: false}}
             />
 
-            <Stack.Screen
-                name="Doubts"
-                component={DoubtsScreen}
-                options={{headerShown: false}}
-            />
+          
 
             <Stack.Screen 
                 name="Event" 
