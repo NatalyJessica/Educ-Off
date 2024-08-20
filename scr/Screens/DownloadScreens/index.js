@@ -3,12 +3,14 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function DownloadScreen() {
   // Navegação
   const navigation = useNavigation();
 
   return (
+    <SafeAreaView style={styles.safeArea}>
     <View style={styles.container}>
       <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollContainer}
@@ -35,20 +37,29 @@ export default function DownloadScreen() {
         </TouchableOpacity>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, // Garante que o container ocupe toda a altura da tela
-    justifyContent: 'flex-end', // Garante que o rodapé fique na parte inferior
+  safeArea: {
+    flex: 1,
   },
+  
+  scrollContainer: {
+    flexGrow: 1,
+  },
+
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end', // Alinha os itens ao rodapé
+    backgroundColor: '#f0f0f0',
+  },
+
   scrollView: {
     flex: 1, // Garante que o KeyboardAwareScrollView ocupe o espaço restante
   },
-  scrollContainer: {
-    paddingBottom: 60, // Espaço para o rodapé
-  },
+
   content: {
     flex: 1, // Garante que o conteúdo ocupe o espaço restante do scroll view
     justifyContent: 'center', // Alinha o conteúdo verticalmente no centro
@@ -56,22 +67,23 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 18,
-    paddingVertical: 20,
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
+    justifyContent: 'space-between', // Distribui os botões igualmente
+    paddingHorizontal: 18, // Espaçamento horizontal
+    paddingVertical: 20, // Espaçamento vertical
+    backgroundColor: 'white', // Cor de fundo do container
+    shadowColor: '#000', // Cor da sombra
+    shadowOpacity: 0.5, // Opacidade da sombra
+    shadowRadius: 3, // Raio da sombra
     shadowOffset: {
       width: 0,
-      height: -2,
+      height: -2, // Ajuste para sombra ficar na parte inferior
     },
-    elevation: 5,
+    elevation: 5, // Elevação da sombra no Android
     position: 'absolute',
     bottom: 0,
     width: '100%',
   },
+  
   button: {
     backgroundColor: 'white',
   },

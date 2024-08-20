@@ -3,16 +3,18 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const BiologiaScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <KeyboardAwareScrollView>
+    <SafeAreaView style={styles.safeArea}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
       <Text style={styles.text}>Bem-vindo à Biologia!</Text>
     </View>
-    
+    </KeyboardAwareScrollView>
 
       <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
@@ -27,16 +29,21 @@ const BiologiaScreen = () => {
               <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Profile')} >
                   <Icon name="user" size={35} color="black" /> 
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}onPress={() => navigation.navigate('Doubts')} >
-            <Icon name="comments" size={35} color="black" /> 
-          </TouchableOpacity>
           </View>
 
-    </KeyboardAwareScrollView>
+   
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+
   container: {
     flex: 1,
     justifyContent: 'center',
