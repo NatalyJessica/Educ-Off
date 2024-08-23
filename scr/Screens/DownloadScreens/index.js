@@ -16,8 +16,8 @@ export default function DownloadScreen() {
         contentContainerStyle={styles.scrollContainer}
         style={styles.scrollView}
       >
-        <View style={styles.content}>
-          <Text>Download</Text>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Download</Text>
         </View>
       </KeyboardAwareScrollView>
 
@@ -60,10 +60,15 @@ const styles = StyleSheet.create({
     flex: 1, // Garante que o KeyboardAwareScrollView ocupe o espaço restante
   },
 
-  content: {
-    flex: 1, // Garante que o conteúdo ocupe o espaço restante do scroll view
-    justifyContent: 'center', // Alinha o conteúdo verticalmente no centro
-    alignItems: 'center', // Alinha o conteúdo horizontalmente no centro
+  header: {
+    backgroundColor: 'rgb(72,83,227)',
+    padding: 8,
+    textAlign: 'center',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',

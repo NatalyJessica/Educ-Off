@@ -4,10 +4,13 @@ import { TextInput,  } from 'react-native-paper'
 import {useFonts, Lustria_400Regular} from '@expo-google-fonts/lustria'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Importa o ícone
 
 
 
 export default function PasswordRecovery() {
+  const navigation = useNavigation();
   const [fonteLoaded] = useFonts({
     Lustria_400Regular,
   });
@@ -20,6 +23,11 @@ export default function PasswordRecovery() {
     <SafeAreaView style={styles.safeArea}>
     <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
+          <TouchableOpacity
+           style={styles.backButton}
+            onPress={() => navigation.goBack()}>
+            <Icon name="arrow-back" size={24} color='rgb(72,83,255)'/>
+            </TouchableOpacity>
         <View style={styles.containerLogo}>
           <Image
           source={require('../../Assets/senha.png')}
@@ -122,6 +130,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'rgb(255,255,255)',
     fontFamily: 'Lustria_400Regular'
+  },
+  backButton:{
+    position: 'absolute',
+    top:10,
+    left:10,
+    padding:10,
+    borderRadius:5,
   }
   
 })

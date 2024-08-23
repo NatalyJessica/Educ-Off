@@ -77,12 +77,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    alignItems: 'center',
-    marginVertical: 10,
+    backgroundColor: 'rgb(72,83,227)',
+    padding: 8,
+    textAlign: 'center',
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
   },
   subjectContainer: {
     backgroundColor: '#fff',

@@ -5,6 +5,7 @@ import {useFonts, Lustria_400Regular} from '@expo-google-fonts/lustria'
 import { TextInput, IconButton } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 
 
@@ -25,11 +26,17 @@ export default function RegisterScreen() {
         <SafeAreaView style={styles.safeArea}>
         <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
+        
         <View style={styles.containerLogo}>
           <Image
           source={require('../../Assets/regrister.jpg')}
           style={styles.image}
           resizeMode='contain' />
+          <TouchableOpacity
+           style={styles.backButton}
+            onPress={() => navigation.goBack()}>
+            <Icon name="arrow-back" size={24} color="white"/>
+            </TouchableOpacity>
         </View>
         <View style={styles.containerForm}>
         <Text style={styles.text}>Se Cadastra-se aqui!</Text>
@@ -85,11 +92,11 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    flex: 1.5,
+   
   },
 
   containerLogo: {
-    flex: 0.5,
+    flex: 0.1,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -173,6 +180,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'rgb(255,255,255)',
     fontFamily: 'Lustria_400Regular'
+  },
+
+  backButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
   },
   
 })

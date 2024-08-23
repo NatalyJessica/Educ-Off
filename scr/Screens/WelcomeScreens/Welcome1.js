@@ -15,7 +15,7 @@ export default function Welcome1() {
     <View style={styles.container}>
       <View style={styles.containerLogo}>
         <Image
-        source={require('../../Assets/welcome1.jpg')}
+        source={require('../../Assets/welcome1.png')}
         style={{width: '100%' }}
         resizeMode='contain'/>
       </View>

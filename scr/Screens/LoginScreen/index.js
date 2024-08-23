@@ -42,7 +42,7 @@ export default function LoginScreen() {
       <View style={styles.container}>
       <View style={styles.containerLogo}>
         <Image
-        source={require('../../Assets/login.jpg')}
+        source={require('../../Assets/login.png')}
         style={styles.containerLogo}
         resizeMode='contain'/>
       </View>

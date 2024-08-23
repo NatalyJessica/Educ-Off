@@ -19,7 +19,7 @@ export default function Welcome2() {
     <View style={styles.container}>
       <View style={styles.containerLogo}>
         <Image
-        source={require('../../Assets/welcome2.jpg')}
+        source={require('../../Assets/welcome2.png')}
         style={styles.image}
         resizeMode='contain'/> 
         </View>

@@ -33,6 +33,20 @@ export default function MainScreen() {
           <Text style={styles.todoDate}>21 JUNHO 2023</Text>
         </View>
       </View>
+      <View style={styles.todoContainer}>
+        <Text style={styles.todoTitle}>A FAZER</Text>
+        <View style={styles.todoItem}>
+          <Text style={styles.todoText}>Fazer simulado Fuvest</Text>
+          <Text style={styles.todoDate}>21 JUNHO 2023</Text>
+        </View>
+      </View>
+      <View style={styles.todoContainer}>
+        <Text style={styles.todoTitle}>A FAZER</Text>
+        <View style={styles.todoItem}>
+          <Text style={styles.todoText}>Fazer simulado Fuvest</Text>
+          <Text style={styles.todoDate}>21 JUNHO 2023</Text>
+        </View>
+      </View>
     </View>
       </KeyboardAwareScrollView>
    <View style={styles.buttonContainer}>
@@ -82,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between', // Distribui os botões igualmente
     paddingHorizontal: 18, // Espaçamento horizontal
-    paddingVertical: 20, // Espaçamento vertical
+    paddingVertical: 12, // Espaçamento vertical
     backgroundColor: 'white', // Cor de fundo do container
     shadowColor: '#000', // Cor da sombra
     shadowOpacity: 0.5, // Opacidade da sombra
@@ -102,13 +116,15 @@ const styles = StyleSheet.create({
     
   },
   header: {
-    alignItems: 'center',
-    marginVertical: 10,
+    backgroundColor: 'rgb(72,83,227)',
+    padding: 8,
+    textAlign: 'center',
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-},
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+  },
   percentageContainer: {
     alignItems: 'center',
     marginVertical: 20,
