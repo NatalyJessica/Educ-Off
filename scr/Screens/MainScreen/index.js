@@ -33,20 +33,8 @@ export default function MainScreen() {
           <Text style={styles.todoDate}>21 JUNHO 2023</Text>
         </View>
       </View>
-      <View style={styles.todoContainer}>
-        <Text style={styles.todoTitle}>A FAZER</Text>
-        <View style={styles.todoItem}>
-          <Text style={styles.todoText}>Fazer simulado Fuvest</Text>
-          <Text style={styles.todoDate}>21 JUNHO 2023</Text>
-        </View>
-      </View>
-      <View style={styles.todoContainer}>
-        <Text style={styles.todoTitle}>A FAZER</Text>
-        <View style={styles.todoItem}>
-          <Text style={styles.todoText}>Fazer simulado Fuvest</Text>
-          <Text style={styles.todoDate}>21 JUNHO 2023</Text>
-        </View>
-      </View>
+      
+    
     </View>
       </KeyboardAwareScrollView>
    <View style={styles.buttonContainer}>

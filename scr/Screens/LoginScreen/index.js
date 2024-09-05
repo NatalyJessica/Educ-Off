@@ -25,17 +25,34 @@ export default function LoginScreen() {
   };
 
   // Função para lidar com a tentativa de login
-  const handleLogin = () => {
-    // Verificar se o email e a senha correspondem aos dados mockados
-    if (email === 'naty@gmail.com' && senha === 'naty2005') {
-      // Se corresponderem, navegue para a tela principal
-      navigation.navigate('Main');
-    } else {
-      // Caso contrário, exibir uma mensagem de erro na página
-      setMensagemErro('E-mail ou senha inválidos');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          senha: senha,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Se o login for bem-sucedido, navegue para a tela principal
+        navigation.navigate('Main');
+      } else {
+        // Se houver algum erro, exibir a mensagem retornada pela API
+        setMensagemErro(data.message || 'E-mail ou senha inválidos');
+      }
+    } catch (error) {
+      // Tratar erros de rede ou outros
+      setMensagemErro('Erro ao tentar fazer login. Tente novamente mais tarde.');
     }
   };
-
+  
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
