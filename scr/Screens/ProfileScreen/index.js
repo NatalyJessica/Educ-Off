@@ -5,13 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ProfileScreen() {
-
-  // navegação
+  // Navegação
   const navigation = useNavigation();
 
-  return (<
-    View style={styles.container}>
-        <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
+  return (
+    <View style={styles.container}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Perfil</Text>
         </View>
@@ -32,24 +31,23 @@ export default function ProfileScreen() {
             <Text style={styles.optionButtonText}>Sair</Text>
           </TouchableOpacity>
         </View>
-        </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
-            <Icon name="home" size={35} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Contents')}>
-            <Icon name="book" size={35} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Download')}>
-            <Icon name="download" size={35} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
-            <Icon name="user" size={35} color="black" />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
+          <Icon name="home" size={35} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Contents')}>
+          <Icon name="book" size={35} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Download')}>
+          <Icon name="download" size={35} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
+          <Icon name="user" size={35} color="black" />
+        </TouchableOpacity>
       </View>
-    
+    </View>
   );
 }
 
@@ -60,22 +58,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f0f0',
-    justifyContent: 'space-between',
   },
   header: {
     backgroundColor: 'rgb(72,83,227)',
-    padding:8,
-    textAlign: 'center',
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   headerText: {
     color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold',
   },
   optionsContainer: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
   },
   optionButton: {
     backgroundColor: 'white',
@@ -83,9 +82,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 10,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 3 },
     elevation: 3,
   },
   optionButtonText: {
@@ -96,10 +95,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 15,
+    paddingVertical: 10,
     backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 5,
     shadowOffset: { width: 0, height: -2 },
     elevation: 5,

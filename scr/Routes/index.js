@@ -14,6 +14,9 @@ import MatematicaScreen from '../Screens/ContentsScreen/Materias/MatematicaScree
 import PortuguesScreen from '../Screens/ContentsScreen/Materias/PortuguesScreen'
 import BiologiaScreen from '../Screens/ContentsScreen/Materias/BiologiaScreen'
 import SimuladoScreen from '../Screens/ContentsScreen/Materias/SimuladoScreen'
+import ModulesScreen from '../Screens/ContentsScreen/ModulesScreen'
+import LessonScreen from '../Screens/ContentsScreen/lessonScreen'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -94,7 +97,17 @@ export default function Routes(){
                 name="SimuladoScreen" 
                 component={SimuladoScreen} 
             />
-            
+    
+    <Stack.Screen
+        name="ModulesScreen"
+        component={ModulesScreen} // Nova tela de módulos
+        options={{headerShown: false}}
+      />
+            <Stack.Screen
+  name="LessonScreen"
+  component={LessonScreen}
+  options={{headerShown: false}}
+/>
 
         </Stack.Navigator>
     )

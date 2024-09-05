@@ -3,48 +3,64 @@ import { SafeAreaView, View, Text, FlatList, StyleSheet, Image, TouchableOpacity
 import { useFonts, Lustria_400Regular } from '@expo-google-fonts/lustria';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+// As imagens agora são de matérias e serão usadas para todos os módulos dessa matéria.
 const images = {
   Matemática: require('../../Assets/Matematica.jpg'),
   Biologia: require('../../Assets/Biologia.png'),
   Portugues: require('../../Assets/Portugues.png'),
+  // Adicione outras matérias conforme necessário
 };
 
-const getImage = (name) => images[name] || require('../../Assets/Default.png');
+const getImage = (subjectName) => images[subjectName] || require('../../Assets/Default.png');
 
-const MatematicaScreen = ({ navigation }) => {
-  const [subjects, setSubjects] = useState([]);
+const ModulesScreen = ({ route, navigation }) => {
+  const { subjectName } = route.params; // Pegando o nome da matéria da navegação
+  const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const [fontLoaded] = useFonts({ Lustria_400Regular });
 
   useEffect(() => {
-    fetch('http://192.168.0.30:8080/v1/subjects')
+    fetch(`http://192.168.0.30:8080/v1/modules/${subjectName}`)
       .then(response => response.json())
       .then(data => {
-        setSubjects(data);
+        setModules(data);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Erro ao buscar as matérias:', error);
-        setError(error);
+        console.error('Erro ao buscar os módulos:', error);
+        setError('Houve um problema ao buscar os módulos. Tente novamente mais tarde.');
         setLoading(false);
       });
-  }, []);
+  }, [subjectName]);
 
-  const handleSubjectPress = (subjectName) => {
-    navigation.navigate('ModulesScreen', { subjectName });
+  const handleModulePress = (moduleName) => {
+    navigation.navigate('LessonScreen', { moduleName });
   };
-
-  const renderSubject = ({ item }) => (
-    <TouchableOpacity style={styles.subjectContainer} onPress={() => handleSubjectPress(item.name)}>
-      <Image source={getImage(item.name)} style={styles.subjectImage} />
-      <Text style={styles.subjectName}>{item.name}</Text>
+  
+  const renderModule = ({ item }) => (
+    <TouchableOpacity style={styles.moduleContainer} onPress={() => handleModulePress(item.module_name)}>
+      <Image source={getImage(subjectName)} style={styles.moduleImage} />
+      <View style={styles.moduleInfo}>
+        <Text style={styles.moduleName}>{item.module_name}</Text>
+        {item.done && (
+          <Icon name="check-circle" size={24} color="green" style={styles.doneIcon} />
+        )}
+      </View>
     </TouchableOpacity>
   );
 
   if (!fontLoaded) {
     return <Text>Carregando fonte...</Text>;
+  }
+
+  if (loading) {
+    return <Text>Carregando módulos...</Text>;
+  }
+
+  if (error) {
+    return <Text>Erro: {error}</Text>;
   }
 
   return (
@@ -53,13 +69,13 @@ const MatematicaScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerText}>MATÉRIAS</Text>
+        <Text style={styles.headerText}>{subjectName.toUpperCase()}</Text>
       </View>
       <FlatList
-        data={subjects}
-        renderItem={renderSubject}
-        keyExtractor={(item) => item.subject_id.toString()}
-        contentContainerStyle={styles.flatListContent} // Adiciona padding no conteúdo da lista
+        data={modules}
+        renderItem={renderModule}
+        keyExtractor={(item) => item.modules_Id.toString()}
+        contentContainerStyle={styles.flatListContent}
       />
     </SafeAreaView>
   );
@@ -77,9 +93,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     height: 60,
-    zIndex: 1, // Garante que o cabeçalho esteja acima do conteúdo
-    elevation: 5, // Sombra para o cabeçalho
-    position: 'relative', // Garante que o cabeçalho não se sobreponha ao conteúdo
+    zIndex: 1,
+    elevation: 5,
   },
   headerText: {
     color: 'white',
@@ -88,7 +103,7 @@ const styles = StyleSheet.create({
     marginLeft: 130,
     fontFamily: 'Lustria_400Regular',
     textTransform: 'uppercase',
-    paddingTop:4
+    paddingTop: 4,
   },
   backButton: {
     position: 'absolute',
@@ -96,7 +111,7 @@ const styles = StyleSheet.create({
     top: 16,
     padding: 8,
   },
-  subjectContainer: {
+  moduleContainer: {
     backgroundColor: '#fff',
     borderRadius: 10,
     marginBottom: 20,
@@ -104,20 +119,28 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
   },
-  subjectImage: {
+  moduleImage: {
     width: 100,
     height: 100,
     borderRadius: 10,
   },
-  subjectName: {
+  moduleInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  moduleName: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
-    marginTop: 10,
+    marginRight: 10,
+  },
+  doneIcon: {
+    marginLeft: 5,
   },
   flatListContent: {
-    paddingBottom: 20, // Espaço extra no fundo, se necessário
+    paddingBottom: 20,
   },
 });
 
-export default MatematicaScreen;
+export default ModulesScreen;

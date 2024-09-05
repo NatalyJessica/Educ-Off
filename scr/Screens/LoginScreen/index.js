@@ -5,237 +5,224 @@ import { useFonts, Lustria_400Regular } from '@expo-google-fonts/lustria';
 import { TextInput, IconButton } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function LoginScreen() {
-  //testar login
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [mensagemErro, setMensagemErro] = useState('');
-  //navegação
-  const navigation = useNavigation();
-  //visibilidade da senha
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  //fonte dos text
+  const [mensagemErro, setMensagemErro] = useState('');
   const [fonteLoaded] = useFonts({
     Lustria_400Regular,
   });
+
   if (!fonteLoaded) {
     return null;
-  };
+  }
 
-  // Função para lidar com a tentativa de login
   const handleLogin = async () => {
     try {
-      const response = await fetch('', {
+      const response = await fetch('http://192.168.0.30:8080/v1/login', { // URL da API de login
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: email,
-          senha: senha,
+          password: senha,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
-        // Se o login for bem-sucedido, navegue para a tela principal
+        // Sucesso no login - redirecionar para a tela principal
         navigation.navigate('Main');
       } else {
-        // Se houver algum erro, exibir a mensagem retornada pela API
+        // Exibir mensagem de erro
         setMensagemErro(data.message || 'E-mail ou senha inválidos');
       }
     } catch (error) {
-      // Tratar erros de rede ou outros
+      // Exibir mensagem de erro em caso de falha na requisição
       setMensagemErro('Erro ao tentar fazer login. Tente novamente mais tarde.');
     }
   };
-  
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-      <View style={styles.containerLogo}>
-        <Image
-        source={require('../../Assets/login.png')}
-        style={styles.containerLogo}
-        resizeMode='contain'/>
-      </View>
-      <View style={styles.containerForm}>
-        <View>
-          <TextInput
-          placeholder='E-mail:'
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-        />
-        </View>
-        
-        <View style={styles.passwordContainer}> 
-          <TextInput
-            placeholder='Senha:'
-            secureTextEntry={!mostrarSenha}
-            value={senha}
-            onChangeText={setSenha}
-            style={styles.passwordInput}
-            
-          />
-          <IconButton
-              icon={mostrarSenha ? 'eye-off' : 'eye'}
-              onPress={() => setMostrarSenha(!mostrarSenha)}
-              style={styles.eyeIcon}
-              size={20}
+        <View style={styles.container}>
+          <View style={styles.containerLogo}>
+            <Image
+              source={require('../../Assets/welcome1.png')}
+              style={styles.image}
+              resizeMode='cover'
             />
-        </View>
-        <View style={styles.alertContainer}>
-        {mensagemErro ? (<View style={styles.alertContainer}>
-              <Text style={styles.alertText}>{mensagemErro}</Text>
-              </View>) : null}
-        </View>
-         
-        <TouchableOpacity style={styles.btnEsq} onPress={() => navigation.navigate('Recovery')}>
-            <Text style={styles.textEsq}>Esqueceu a senha?</Text>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Icon name="arrow-back" size={24} color="white" />
             </TouchableOpacity>
+          </View>
+
+          <View style={styles.containerForm}>
+            <Text style={styles.text}>Faça seu login!</Text>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                label='E-mail'
+                style={styles.input}
+                mode='outlined'
+                theme={{ colors: { primary: 'rgb(72,83,255)' } }}
+                value={email}
+                onChangeText={setEmail}
+              />
+            </View>
+
+            <View style={styles.passwordContainer}>
+              <TextInput
+                placeholder='Senha'
+                secureTextEntry={!mostrarSenha}
+                value={senha}
+                onChangeText={setSenha}
+                style={styles.passwordInput}
+                mode='outlined'
+                theme={{ colors: { primary: 'rgb(72,83,255)' } }}
+              />
+              <IconButton
+                icon={mostrarSenha ? 'eye-off' : 'eye'}
+                onPress={() => setMostrarSenha(!mostrarSenha)}
+                style={styles.eyeIcon}
+                size={20}
+              />
+            </View>
+
+            {mensagemErro ? (
+              <View style={styles.alertContainer}>
+                <Text style={styles.alertText}>{mensagemErro}</Text>
+              </View>
+            ) : null}
+
             <View>
-              <TouchableOpacity style={styles.btns} onPress={() => navigation.navigate('Main')}>
-              <Text style={styles.btnTxt}>Logar</Text>
+              <TouchableOpacity style={styles.btnLogin} onPress={handleLogin}>
+                <Text style={styles.btnTxt}>Logar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.btnTxt}>Cadastrar</Text>
               </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity style={styles.btns} onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.btnTxt} >Cadastrar</Text>
-                </TouchableOpacity>
-            </View>
-            
-     
-      </View>
-    </View>
-    </KeyboardAwareScrollView>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
-  )
-   
+  );
 }
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: '#F5F5F5',
   },
-
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#f0f0f0',
-  },
-
   scrollContainer: {
     flexGrow: 1,
+    justifyContent: 'flex-start',
   },
-
+  container: {
+    padding: 10,
+  },
   containerLogo: {
-    flex: 2,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 50,
+    marginBottom: 10,
   },
-
   image: {
-    height: 50,
-    width: 100,
+    width: '100%',
+    height: 200,
+    borderRadius: 15,
+    borderColor: 'rgb(72,83,255)',
+    borderWidth: 0,
   },
-
+  backButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
   containerForm: {
-    flex: 1,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    paddingStart: '5%',
-    paddingEnd: '5%',
-    paddingTop: '5%', // Adiciona espaçamento superior
+    flexGrow: 1,
+    backgroundColor: '#FFF',
+    borderRadius: 15,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-
+  inputContainer: {
+    marginBottom: 20,
+  },
+  input: {
+    backgroundColor: '#FFF',
+    fontFamily: 'Lustria_400Regular',
+    fontSize: 14,
+  },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-   
-
+    marginBottom: 15,
   },
   passwordInput: {
     flex: 1,
-    width: '100%',
-    height: 50,
-    fontSize: 12,
+    backgroundColor: '#FFF',
     fontFamily: 'Lustria_400Regular',
-    paddingHorizontal: 8,
-    backgroundColor:'rgb(230,230,250)',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    fontSize: 14,
   },
   eyeIcon: {
     position: 'absolute',
-    right: 5,
+    right: 10,
   },
-
-  input:{
-    width: '100%',
-    height: 50,
-    fontSize: 12,
-    fontFamily: 'Lustria_400Regular',
-    paddingHorizontal: 15,
-    backgroundColor:'rgb(230,230,250)'
-  },
-
-   
-  btns: {
-    backgroundColor: 'rgb(72,83,277)',
-    borderRadius: 80,
-    paddingVertical: 1,
-    width: '70%',
-    alignItems: 'center',
-    marginTop: 10,
-    alignSelf: 'center',
-
-  },
-
-  btnTxt: {
+  text: {
     fontSize: 18,
-    color: 'rgb(255,255,255)',
-    fontFamily: 'Lustria_400Regular'
-  },
-
-  btnEsq:{
-  marginBottom:25,
-  alignItems: 'flex-end',
-  },
-
-  textEsq:{
-    fontSize: 15,
-    fontWeight:'500',
+    fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: 20,
     fontFamily: 'Lustria_400Regular',
-    color: 'rgb(72,83,255)'
+    color: 'rgb(72,83,255)',
   },
-
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+  btnLogin: {
+    backgroundColor: 'rgb(72,83,255)',
+    borderRadius: 25,
+    paddingVertical: 12,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 10,
   },
-  
+  btnRegister: {
+    backgroundColor: 'rgb(100,150,255)', // Cor diferente para o botão de cadastro
+    borderRadius: 25,
+    paddingVertical: 12,
+    width: '100%',
+    alignItems: 'center',
+  },
+  btnTxt: {
+    fontSize: 16,
+    color: '#FFF',
+    fontFamily: 'Lustria_400Regular',
+  },
   alertContainer: {
-    borderRadius: 4, // Raio da borda do alerta de erro
-    paddingHorizontal: 15, // Preenchimento horizontal do alerta de erro
-    paddingVertical: 10, // Preenchimento vertical do alerta de erro
-
+    borderRadius: 4,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: '#fdd',
+    marginBottom: 15,
   },
   alertText: {
-    color: 'red', // Cor do texto do alerta de erro
+    color: '#d9534f',
     fontFamily: 'Lustria_400Regular',
-    fontSize: 14, // Tamanho da fonte do texto do alerta de erro
+    fontSize: 14,
   },
-
 });
