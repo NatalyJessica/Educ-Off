@@ -6,12 +6,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from 'react-native-calendars';
 import { Picker } from '@react-native-picker/picker';
 
-const API_URL = 'http://192.168.0.30:8080/v1/tasks'; // Substitua pela URL do seu endpoint
+const API_URL = 'http://192.168.0.13:8080/v1/tasks'; // Substitua pela URL do seu endpoint
+const SUBJECTS_API_URL = 'http://192.168.0.13:8080/v1/subjects-with-done-modules'; // URL da API de subjects
 
+
+const images = {
+  Matemática: require('../../Assets/Matematica.jpg'),
+  Biologia: require('../../Assets/Biologia.png'),
+  Portugues: require('../../Assets/Portugues.png'),
+};
+
+const getImage = (name) => images[name] || require('../../Assets/Default.png');
 export default function MainScreen() {
   const navigation = useNavigation();
   const [selectedDate, setSelectedDate] = useState('');
   const [tasks, setTasks] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
@@ -23,7 +33,7 @@ export default function MainScreen() {
 
   useEffect(() => {
     fetchTasks();
-
+    fetchSubjects();
     const backAction = () => {
       Alert.alert('Sair', 'Deseja realmente sair do aplicativo?', [
         {
@@ -41,7 +51,6 @@ export default function MainScreen() {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => backHandler.remove();
   }, []);
-
   const fetchTasks = async () => {
     try {
       const response = await fetch(API_URL, {
@@ -50,7 +59,6 @@ export default function MainScreen() {
           'Content-Type': 'application/json',
         },
       });
-      
       if (response.ok) {
         const data = await response.json();
         setTasks(data);
@@ -61,19 +69,35 @@ export default function MainScreen() {
       console.error('Erro ao buscar tarefas:', error);
     }
   };
-
+  const fetchSubjects = async () => {
+    try {
+      const response = await fetch(SUBJECTS_API_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSubjects(data);
+      } else {
+        console.error('Erro ao buscar subjects:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar subjects:', error);
+    }
+  };
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
     fetchTasks();
     setModalVisible(true);
   };
-
   const handleAddTask = async () => {
     try {
-      const newTask = { 
-        description: newTaskName, 
-        status: newTaskStatus, 
-        date: selectedDate 
+      const newTask = {
+        description: newTaskName,
+        status: newTaskStatus,
+        date: selectedDate
       };
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -82,10 +106,10 @@ export default function MainScreen() {
         },
         body: JSON.stringify(newTask),
       });
- 
       if (response.ok) {
         fetchTasks();
-        setModalVisible(false);
+
+setModalVisible(false);
         setNewTaskName('');
         setNewTaskStatus('A Fazer');
       } else {
@@ -95,7 +119,6 @@ export default function MainScreen() {
       console.error('Erro ao adicionar tarefa:', error);
     }
   };
-
   const handleUpdateTask = async (taskId, newStatus) => {
     try {
       const response = await fetch(`${API_URL}/${taskId}`, {
@@ -105,7 +128,6 @@ export default function MainScreen() {
         },
         body: JSON.stringify({ status: newStatus }),
       });
- 
       if (response.ok) {
         fetchTasks();
         setUpdateModalVisible(false);
@@ -116,7 +138,6 @@ export default function MainScreen() {
       console.error('Erro ao atualizar tarefa:', error);
     }
   };
-
   const handleDeleteTask = async (taskId) => {
     try {
       const response = await fetch(`${API_URL}/${taskId}`, {
@@ -125,7 +146,6 @@ export default function MainScreen() {
           'Content-Type': 'application/json',
         },
       });
- 
       if (response.ok) {
         fetchTasks();
       } else {
@@ -135,14 +155,15 @@ export default function MainScreen() {
       console.error('Erro ao deletar tarefa:', error);
     }
   };
-
   const handleOpenUpdateModal = (task) => {
     setSelectedTask(task.task_id);
     setUpdateTaskName(task.description);
     setUpdateTaskStatus(task.status);
     setUpdateModalVisible(true);
   };
-
+  const handleSubjectPress = (subjectName) => {
+    navigation.navigate('ModulesScreen', { subjectName });
+  };
   const renderTask = ({ item }) => (
     <View style={[styles.todoItem, { backgroundColor: getStatusColor(item.status) }]}>
       <View style={styles.iconContainer}>
@@ -160,20 +181,23 @@ export default function MainScreen() {
       </TouchableOpacity>
     </View>
   );
-
+  const renderSubject = ({ item }) => (
+    <TouchableOpacity style={styles.subjectItem} onPress={() => handleSubjectPress(item.name)}>
+      <Text style={styles.subjectName}>{item.name}</Text>
+    </TouchableOpacity>
+  );
   const getStatusColor = (status) => {
     switch (status) {
       case 'A Fazer':
-        return '#f39c12'; 
+        return '#F39C12';
       case 'Fazendo':
-        return '#3498db'; 
+        return '#3498DB';
       case 'Pronto':
-        return '#2ecc71'; 
+        return '#2ECC71';
       default:
-        return '#ffffff'; 
+        return '#FFFFFF';
     }
   };
-
   const getStatusIcon = (status) => {
     switch (status) {
       case 'A Fazer':
@@ -186,7 +210,6 @@ export default function MainScreen() {
         return <Icon name="question-circle" size={20} color="white" />;
     }
   };
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
@@ -199,16 +222,17 @@ export default function MainScreen() {
             [selectedDate]: { selected: true, marked: true, selectedColor: 'blue' },
           }}
           theme={{
-            backgroundColor: '#ffffff',
-            calendarBackground: '#ffffff',
-            textSectionTitleColor: '#b6c1cd',
-            selectedDayBackgroundColor: '#00adf5',
-            selectedDayTextColor: '#ffffff',
-            todayTextColor: '#00adf5',
-            dayTextColor: '#2d4150',
-            textDisabledColor: '#d9e1e8',
-            dotColor: '#00adf5',
-            selectedDotColor: '#ffffff',
+            backgroundColor: '#FFFFFF',
+            calendarBackground: '#FFFFFF',
+            textSectionTitleColor: '#B6C1CD',
+            selectedDayBackgroundColor: '#00ADF5',
+
+selectedDayTextColor: '#FFFFFF',
+            todayTextColor: '#00ADF5',
+            dayTextColor: '#2D4150',
+            textDisabledColor: '#D9E1E8',
+            dotColor: '#00ADF5',
+            selectedDotColor: '#FFFFFF',
             arrowColor: 'orange',
             monthTextColor: 'blue',
             indicatorColor: 'blue',
@@ -230,6 +254,14 @@ export default function MainScreen() {
             data={tasks}
             renderItem={renderTask}
             keyExtractor={(item) => item.task_id.toString()}
+          />
+        </View>
+        <View style={styles.subjectContainer}>
+          <Text style={styles.subjectTitle}>Subjects</Text>
+          <FlatList
+            data={subjects}
+            renderItem={renderSubject}
+            keyExtractor={(item) => item.subject_id.toString()}
           />
         </View>
       </ScrollView>
@@ -296,7 +328,8 @@ export default function MainScreen() {
               style={styles.picker}
               onValueChange={(itemValue) => setUpdateTaskStatus(itemValue)}
             >
-              <Picker.Item label="A Fazer" value="A Fazer" />
+8:57
+<Picker.Item label="A Fazer" value="A Fazer" />
               <Picker.Item label="Fazendo" value="Fazendo" />
               <Picker.Item label="Pronto" value="Pronto" />
             </Picker>
@@ -312,6 +345,7 @@ export default function MainScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -326,6 +360,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
     fontWeight: 'bold',
+  },
+  subjectContainer: {
+    padding: 10,
+  },
+  subjectTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  subjectItem: {
+    padding: 10,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  subjectText: {
+    fontSize: 16,
   },
   scrollContainer: {
     flex: 1,

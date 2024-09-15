@@ -3,18 +3,16 @@ import { SafeAreaView, View, Text, FlatList, StyleSheet, Image, TouchableOpacity
 import { useFonts, Lustria_400Regular } from '@expo-google-fonts/lustria';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// As imagens agora são de matérias e serão usadas para todos os módulos dessa matéria.
 const images = {
   Matemática: require('../../Assets/Matematica.jpg'),
   Biologia: require('../../Assets/Biologia.png'),
   Portugues: require('../../Assets/Portugues.png'),
-  // Adicione outras matérias conforme necessário
 };
 
 const getImage = (subjectName) => images[subjectName] || require('../../Assets/Default.png');
 
 const ModulesScreen = ({ route, navigation }) => {
-  const { subjectName } = route.params; // Pegando o nome da matéria da navegação
+  const { subjectName } = route.params; 
   const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +20,7 @@ const ModulesScreen = ({ route, navigation }) => {
   const [fontLoaded] = useFonts({ Lustria_400Regular });
 
   useEffect(() => {
-    fetch(`http://192.168.0.30:8080/v1/modules/${subjectName}`)
+    fetch(`http://192.168.0.13:8080/v1/modules/${subjectName}`)
       .then(response => response.json())
       .then(data => {
         setModules(data);

@@ -12,7 +12,7 @@ const LessonScreen = ({ route, navigation }) => {
   const [fontLoaded] = useFonts({ Lustria_400Regular });
 
   useEffect(() => {
-    fetch(`http://192.168.0.30:8080/v1/modules/${moduleName}/lesson`)
+    fetch(`http://192.168.0.13:8080/v1/modules/${moduleName}/lesson`)
       .then(response => response.json())
       .then(data => {
         if (data.lesson_id && data.title && data.content) {
@@ -30,7 +30,7 @@ const LessonScreen = ({ route, navigation }) => {
   }, [moduleName]);
 
   const handleFinishLesson = () => {
-    fetch(`http://192.168.0.30:8080/v1/modules/${lesson.lesson_id}/finish`, {
+    fetch(`http://192.168.0.13:8080/v1/modules/${lesson.lesson_id}/finish`, {
       method: 'PUT',
     })
     .then(() => {

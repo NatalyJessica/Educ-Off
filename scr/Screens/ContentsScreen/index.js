@@ -19,7 +19,7 @@ const MatematicaScreen = ({ navigation }) => {
   const [fontLoaded] = useFonts({ Lustria_400Regular });
 
   useEffect(() => {
-    fetch('http://192.168.0.30:8080/v1/subjects')
+    fetch('http://192.168.0.13:8080/v1/subjects')
       .then(response => response.json())
       .then(data => {
         setSubjects(data);
@@ -68,7 +68,7 @@ const MatematicaScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0, // Adiciona espaço suficiente para o cabeçalho
+    paddingTop: 0,
   },
   header: {
     backgroundColor: 'rgb(72,83,227)',
@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     height: 60,
-    zIndex: 1, // Garante que o cabeçalho esteja acima do conteúdo
-    elevation: 5, // Sombra para o cabeçalho
-    position: 'relative', // Garante que o cabeçalho não se sobreponha ao conteúdo
+    zIndex: 1, 
+    elevation: 5, 
+    position: 'relative', 
   },
   headerText: {
     color: 'white',
