@@ -20,7 +20,7 @@ const ModulesScreen = ({ route, navigation }) => {
   const [fontLoaded] = useFonts({ Lustria_400Regular });
 
   useEffect(() => {
-    fetch(`http://192.168.0.13:8080/v1/modules/${subjectName}`)
+    fetch(`http://localhost:8080/v1/modules/${subjectName}`)
       .then(response => response.json())
       .then(data => {
         setModules(data);

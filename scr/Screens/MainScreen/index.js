@@ -6,8 +6,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from 'react-native-calendars';
 import { Picker } from '@react-native-picker/picker';
 
-const API_URL = 'http://192.168.0.13:8080/v1/tasks'; // Substitua pela URL do seu endpoint
-const SUBJECTS_API_URL = 'http://192.168.0.13:8080/v1/subjects-with-done-modules'; // URL da API de subjects
+const API_URL = 'http://localhost:8080/v1/tasks'; // Substitua pela URL do seu endpoint
+const SUBJECTS_API_URL = 'http://localhost:8080/v1/subjects-with-done-modules'; // URL da API de subjects
 
 
 const images = {
@@ -80,9 +80,7 @@ export default function MainScreen() {
       if (response.ok) {
         const data = await response.json();
         setSubjects(data);
-      } else {
-        console.error('Erro ao buscar subjects:', response.statusText);
-      }
+      } 
     } catch (error) {
       console.error('Erro ao buscar subjects:', error);
     }
@@ -257,7 +255,7 @@ selectedDayTextColor: '#FFFFFF',
           />
         </View>
         <View style={styles.subjectContainer}>
-          <Text style={styles.subjectTitle}>Subjects</Text>
+          <Text style={styles.subjectTitle}>Matérias</Text>
           <FlatList
             data={subjects}
             renderItem={renderSubject}
@@ -328,7 +326,6 @@ selectedDayTextColor: '#FFFFFF',
               style={styles.picker}
               onValueChange={(itemValue) => setUpdateTaskStatus(itemValue)}
             >
-8:57
 <Picker.Item label="A Fazer" value="A Fazer" />
               <Picker.Item label="Fazendo" value="Fazendo" />
               <Picker.Item label="Pronto" value="Pronto" />

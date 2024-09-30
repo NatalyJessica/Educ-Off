@@ -23,7 +23,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://192.168.0.30:8080/v1/login', { // URL da API de login
+      const response = await fetch('http://localhost:8080/v1/login', { // URL da API de login
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
