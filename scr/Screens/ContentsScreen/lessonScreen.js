@@ -12,7 +12,7 @@ const LessonScreen = ({ route, navigation }) => {
   const [fontLoaded] = useFonts({ Lustria_400Regular });
 
   useEffect(() => {
-    fetch(`http://177.220.18.73:8080/v1/modules/${moduleName}/lesson`)
+    fetch(`http://localhost:8080/v1/modules/${moduleName}/lesson`)
       .then(response => response.json())
       .then(data => {
         if (data.lesson_id && data.title && data.content) {
@@ -30,7 +30,7 @@ const LessonScreen = ({ route, navigation }) => {
   }, [moduleName]);
 
   const handleFinishLesson = () => {
-    fetch(`http://177.220.18.73:8080/v1/modules/${lesson.lesson_id}/finish`, {
+    fetch(`http://localhost:8080/v1/modules/${lesson.lesson_id}/finish`, {
       method: 'PUT',
     })
     .then(() => {
@@ -81,7 +81,9 @@ const LessonScreen = ({ route, navigation }) => {
         <Text style={styles.text}>{lesson.content}</Text>
         <Button title="Concluir Lição" onPress={handleFinishLesson} />
       </ScrollView>
+      
     </SafeAreaView>
+
   );
 };
 

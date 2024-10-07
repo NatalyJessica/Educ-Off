@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useFonts, Lustria_400Regular } from '@expo-google-fonts/lustria';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const images = {
   Matemática: require('../../Assets/Matematica.jpg'),
@@ -61,6 +61,20 @@ const MatematicaScreen = ({ navigation }) => {
         keyExtractor={(item) => item.subject_id.toString()}
         contentContainerStyle={styles.flatListContent} // Adiciona padding no conteúdo da lista
       />
+       <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
+          <Icon name="home" size={35} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Contents')}>
+          <Icon name="book" size={35} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Download')}>
+          <Icon name="download" size={35} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
+          <Icon name="user" size={35} color="black" />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -117,6 +131,29 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     paddingBottom: 20, // Espaço extra no fundo, se necessário
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Distribui os botões igualmente
+    paddingHorizontal: 18, // Espaçamento horizontal
+    paddingVertical: 20, // Espaçamento vertical
+    backgroundColor: 'white', // Cor de fundo do container
+    shadowColor: '#000', // Cor da sombra
+    shadowOpacity: 0.5, // Opacidade da sombra
+    shadowRadius: 3, // Raio da sombra
+    shadowOffset: {
+      width: 0,
+      height: -2, // Ajuste para sombra ficar na parte inferior
+    },
+    elevation: 5, // Elevação da sombra no Android
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+  
+  button: {
+    backgroundColor: 'white',
   },
 });
 
